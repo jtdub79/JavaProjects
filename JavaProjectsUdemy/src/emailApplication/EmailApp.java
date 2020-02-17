@@ -23,7 +23,7 @@ public class EmailApp {
 		emails.add(new Email("John","Doe"));
 		
 		for(Email el : emails) {
-			System.out.println(el.getPerson().getFullName() + " - " + el.getPerson().getDepartment().name());
+			System.out.println(el.getPerson().getFullName() + " - " + el.getPerson().getDepartment().name() + " - " + el.getPassword());
 		}
 		
 	}

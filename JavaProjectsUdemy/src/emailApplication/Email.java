@@ -18,10 +18,11 @@ public class Email {
 	// Constructors
 	public Email(Employee person) {
 		this.person = person;
+		this.password = this.generatePassword(12);
 	}
 	
 	public Email(String firstName, String lastName) {
-		this.person = new Employee(firstName, lastName);
+		this(new Employee(firstName, lastName));
 	}
 	
 	// Getters and Setters
@@ -99,12 +100,16 @@ public class Email {
 		}
 	}
 	
-	public String generatePassword() {
-		String newPassword = null;
-		//TODO generate the new password
+	public String generatePassword(int length) {
 		
-		this.password = newPassword;
+		String passwordSet = "ABCDEFGHIJKLMONPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$&%";
+		char[] password = new char[length];
+		for(int i=0; i < length; i++) {
+			int rand = (int) (Math.random() * passwordSet.length());
+			System.out.println(rand);
+			password[i] = passwordSet.charAt(rand);
+		}
 		
-		return this.password;
+		return new String(password);
 	}
 }
