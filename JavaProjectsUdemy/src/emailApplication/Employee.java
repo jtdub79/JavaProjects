@@ -41,8 +41,8 @@ public class Employee extends Person{
 	}
 	
 	public void inputDepartment() {
-		System.out.println("\nEnter the department for " + this.getFullName() + ":");
-		System.out.println("1 - Sales\n2 - Development\n3 - Accounting\n0 - None\n");
+		System.out.println("Enter the department for " + this.getFullName() + ":");
+		System.out.print("1 - Sales\n2 - Development\n3 - Accounting\n0 - None\n");
 		Scanner in = new Scanner(System.in);
 		int dept = in.nextInt();
 		switch (dept) {

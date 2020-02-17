@@ -13,12 +13,14 @@ public class Email {
 	private String password;
 	private String email;
 	private String altEmail;
-	private int capacity;
+	private int capacity = 500;
+	static private String companySuffix = "abccompany.com";
 
 	// Constructors
 	public Email(Employee person) {
 		this.person = person;
 		this.password = this.generatePassword(12);
+		this.email = person.getFirstName().toLowerCase() + "." + person.getLastName().toLowerCase() + "@" + person.getDepartment().name().toLowerCase() + "." + companySuffix;
 	}
 	
 	public Email(String firstName, String lastName) {
@@ -106,7 +108,6 @@ public class Email {
 		char[] password = new char[length];
 		for(int i=0; i < length; i++) {
 			int rand = (int) (Math.random() * passwordSet.length());
-			System.out.println(rand);
 			password[i] = passwordSet.charAt(rand);
 		}
 		
