@@ -9,18 +9,22 @@ package emailApplication;
  */
 public class Email {
 	
+	private Employee person;
 	private String password;
 	private String email;
 	private String altEmail;
-	
-	public String getEmail() {
-		return this.email;
-	}
+	private int capacity;
 
-	public String getAltEmail() {
-		return this.altEmail;
+	// Constructors
+	public Email(Employee person) {
+		this.person = person;
 	}
 	
+	public Email(String firstName, String lastName) {
+		this.person = new Employee(firstName, lastName);
+	}
+	
+	// Getters and Setters
 	public String getPassword() {
 		return this.password;
 	}
@@ -29,12 +33,36 @@ public class Email {
 		this.password = newPassword;
 	}
 	
-	public void setEmail(String newEmail) {
-		this.email = newEmail;
+	public String getEmail() {
+		return this.email;
 	}
 	
-	public void setAltEmail(String newEmail) {
-		this.altEmail = newEmail;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getAltEmail() {
+		return this.altEmail;
+	}
+	
+	public void setAltEmail(String altEmail) {
+		this.altEmail = altEmail;
+	}
+
+	public Employee getPerson() {
+		return person;
+	}
+
+	public void setPerson(Employee person) {
+		this.person = person;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
 	}
 	
 	public void setProperty(String property, String newValue) {
@@ -52,7 +80,31 @@ public class Email {
 				int callersLineNumber = Thread.currentThread().getStackTrace()[1].getLineNumber();
 				String className = Thread.currentThread().getStackTrace()[1].getClassName();
 				System.out.println("Problem in " +  className + " at line " + callersLineNumber);
-			
 		}
+	}
+	
+	public String getProperty(String property) {
+		switch (property) {
+			case "email" :
+				return this.getEmail();
+			case "password" :
+				return this.getPassword();
+			case "altEmail" :
+				return this.getAltEmail();
+			default :
+				int callersLineNumber = Thread.currentThread().getStackTrace()[1].getLineNumber();
+				String className = Thread.currentThread().getStackTrace()[1].getClassName();
+				System.out.println("Problem in " +  className + " at line " + callersLineNumber);
+				return null;
+		}
+	}
+	
+	public String generatePassword() {
+		String newPassword = null;
+		//TODO generate the new password
+		
+		this.password = newPassword;
+		
+		return this.password;
 	}
 }
