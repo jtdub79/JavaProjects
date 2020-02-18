@@ -30,6 +30,11 @@ public class Student {
 		public String getLongName() {
 			return this.longName;
 		}
+		public void printEnums() {
+			for(Courses el : Courses.values()) {
+				System.out.println("\t" + el.ordinal() + " - " + longName);
+			}
+		}
 	}
 	private static float costPerClass = 600f;
 	private static int runningStudentID = 1000;
@@ -127,12 +132,15 @@ public class Student {
 		this.classYear = in.nextInt();
 	}
 	private void generateStudentID() {
-		this.studentID = classYear * (int)1e5 + runningStudentID;
+		this.studentID = classYear * (int)1e5 + Student.runningStudentID;
 		runningStudentID++;
 	}
 	
 	public void enrollCourses() {
 		//TODO generate enrollment code
+		Student.Courses.printEnums();
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter student class year:");
 		
 	}
 }
