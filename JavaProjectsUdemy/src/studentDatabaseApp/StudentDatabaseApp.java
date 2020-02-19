@@ -4,16 +4,17 @@
 package studentDatabaseApp;
 
 /**
- * @author Jim
+ * @author Jim Westfall
  *
  */
-public class StudentDatabaseAppl {
+public class StudentDatabaseApp {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		School mySchool = new School();
 
 	}
 

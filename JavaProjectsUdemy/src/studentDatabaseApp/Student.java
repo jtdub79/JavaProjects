@@ -9,46 +9,27 @@ import java.util.Scanner;
 
 
 /**
- * @author Jim
+ * @author Jim Westfall
  *
  */
 public class Student {
 	
-	public static enum Courses{
-		Hist101("History 101"),
-		Math101("Mathematics 101"),
-		Eng101("English 101"),
-		Chem101("Chemistry 101"),
-		CS101("Computer Science 101");
-		
-		private String longName;
-		
-		Courses(String longName){
-			this.longName = longName;
-		}
-		
-		public String getLongName() {
-			return this.longName;
-		}
-		public void printEnums() {
-			for(Courses el : Courses.values()) {
-				System.out.println("\t" + el.ordinal() + " - " + longName);
-			}
-		}
-	}
-	private static float costPerClass = 600f;
+	
 	private static int runningStudentID = 1000;
-	
-	
+		
 	private String firstName;
 	private String lastName;
 	private int classYear = 1;
 	private int studentID;
 	private float accountBalance = 0.0f;
-	private List<Courses> enrolledCourses = new ArrayList<Courses>();
+	private List<School.Courses> enrolledCourses = new ArrayList<School.Courses>();
 	
 	
 	// Constructors
+	public Student() {
+		this(Student.inputName("first"), Student.inputName("last"));
+	}
+	
 	public Student(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -56,6 +37,13 @@ public class Student {
 		this.inputClassYear();
 		
 		this.generateStudentID();
+	}	
+	
+	// Methods to aid constructors
+	private static String inputName(String whichName) {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter student  "+ whichName + " name:");
+		return in.next();
 	}
 	
 	
@@ -83,6 +71,9 @@ public class Student {
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
 	}
 	/**
 	 * @return the classYear
@@ -137,10 +128,25 @@ public class Student {
 	}
 	
 	public void enrollCourses() {
-		//TODO generate enrollment code
-		Student.Courses.printEnums();
-		Scanner in = new Scanner(System.in);
-		System.out.println("Enter student class year:");
 		
+		System.out.println("Courses Offered:");
+		for(School.Courses el : School.Courses.values()) {
+			System.out.println("\t" + el.ordinal() + " - " + el.getLongName());
+		}
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter course to enroll(negative numberto finish/cacnel):");
+		int choice = in.nextInt();
+		assert(choice < School.Courses.values().length);
+		if(choice < 0) {
+			System.out.println("Finished enrolling.");
+			return;
+		}else {
+			this.enrolledCourses.add(School.Courses.values()[choice]);
+			this.addToBalance(School.getCostPerClass());
+		}
+	}
+	
+	public void printStudentInfo() {
+		//TODO add print student info code
 	}
 }
