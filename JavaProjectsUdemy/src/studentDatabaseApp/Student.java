@@ -117,24 +117,25 @@ public class Student {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter student class year:");
 		System.out.println("\t1 - Freshman");
-		System.out.println("\t1 - Sophomore");
-		System.out.println("\t1 - Junior");
-		System.out.println("\t1 - Senior");
+		System.out.println("\t2 - Sophomore");
+		System.out.println("\t3 - Junior");
+		System.out.println("\t4 - Senior");
 		this.classYear = in.nextInt();
 	}
 	private void generateStudentID() {
-		this.studentID = classYear * (int)1e5 + Student.runningStudentID;
+		this.studentID = classYear * (int)1e4 + Student.runningStudentID;
 		runningStudentID++;
 	}
 	
 	public void enrollCourses() {
 		
+		//TODO make  loop to add multiple courses
 		System.out.println("Courses Offered:");
 		for(School.Courses el : School.Courses.values()) {
 			System.out.println("\t" + el.ordinal() + " - " + el.getLongName());
 		}
 		Scanner in = new Scanner(System.in);
-		System.out.println("Enter course to enroll(negative numberto finish/cacnel):");
+		System.out.println("Enter course to enroll(negative number to finish/cancel):");
 		int choice = in.nextInt();
 		assert(choice < School.Courses.values().length);
 		if(choice < 0) {
@@ -148,5 +149,13 @@ public class Student {
 	
 	public void printStudentInfo() {
 		//TODO add print student info code
+		System.out.println(this.getFullName());
+		System.out.println("\tStudent ID        : " + this.studentID);
+		System.out.println("\tStudent Class Year: " + this.classYear);
+		System.out.println("\tAccount Balance   : " + this.accountBalance);
+		System.out.println("\tCourses currently enrolled:");
+		for(School.Courses el : enrolledCourses) {
+			System.out.println("\t" + el.getLongName());
+		}
 	}
 }
