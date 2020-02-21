@@ -55,14 +55,12 @@ public class School {
 	}
 	
 	public void addStudents() {
-		Scanner in = new Scanner(System.in);
-		System.out.println("Would you like to add students (y/n):");
-		char ans = in.next().toLowerCase().charAt(0);
+		char ans = InputHandler.readCharLower("Would you like to add students (y/n):");
+		
 		if (ans != 'y') {return;}
 		while (ans == 'y') {
 			students.add(new Student());
-			System.out.println("Would you like to add another student (y/n):");
-			ans = in.next().toLowerCase().charAt(0);
+			ans = InputHandler.readCharLower("Would you like to add another student (y/n):");
 		}
 	}
 	
@@ -80,17 +78,13 @@ public class School {
 	}
 	
 	public void enrollStudentCourses() {
-		Scanner in = new Scanner(System.in);
-		System.out.println("Would you like to enroll students in courses(y/n):");
-		char ans = in.next().toLowerCase().charAt(0);
+		char ans = InputHandler.readCharLower("Would you like to enroll students in courses(y/n):");
 		if (ans != 'y') {return;}
 		while (ans == 'y') {
-			System.out.println("Enter student ID (5 digits):");
-			int id = in.nextInt();
+			int id = InputHandler.readInt("Enter student ID (5 digits):");
 			Student theStudent = this.findStudentById(id);
 			if(theStudent == null) {
-				System.out.println("Student ID not found! \nWould you like to enter another (y/n)?:");
-				ans = in.next().toLowerCase().charAt(0);
+				ans = InputHandler.readCharLower("Student ID not found! \nWould you like to enter another (y/n)?:");
 				if (ans != 'y') {return;}
 				else {continue;}
 			}else {

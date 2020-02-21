@@ -41,9 +41,7 @@ public class Student {
 	
 	// Methods to aid constructors
 	private static String inputName(String whichName) {
-		Scanner in = new Scanner(System.in);
-		System.out.println("Enter student  "+ whichName + " name:");
-		return in.next();
+		return InputHandler.readString("Enter student  "+ whichName + " name:");
 	}
 	
 	
@@ -114,13 +112,12 @@ public class Student {
 		this.accountBalance += debt;
 	}
 	private void inputClassYear() {
-		Scanner in = new Scanner(System.in);
-		System.out.println("Enter student class year:");
-		System.out.println("\t1 - Freshman");
-		System.out.println("\t2 - Sophomore");
-		System.out.println("\t3 - Junior");
-		System.out.println("\t4 - Senior");
-		this.classYear = in.nextInt();
+		String msg = "Enter student class year:\n" + 
+						"\t1 - Freshman\n" + 
+						"\t2 - Sophomore\n" + 
+						"\t3 - Junior\n" + 
+						"\t4 - Senior\n";
+		this.classYear = InputHandler.readInt(msg, 1, 4);
 	}
 	private void generateStudentID() {
 		this.studentID = classYear * (int)1e4 + Student.runningStudentID;
@@ -130,14 +127,17 @@ public class Student {
 	public void enrollCourses() {
 		
 		//TODO make  loop to add multiple courses
-		System.out.println("Courses Offered:");
+		
+		String msg = "Courses Offered:\n";
 		for(School.Courses el : School.Courses.values()) {
-			System.out.println("\t" + el.ordinal() + " - " + el.getLongName());
+			msg += "\t" + el.ordinal() + " - " + el.getLongName() + "\n";
 		}
-		Scanner in = new Scanner(System.in);
-		System.out.println("Enter course to enroll(negative number to finish/cancel):");
-		int choice = in.nextInt();
+		msg += "Enter course to enroll(enter -1 to finish/cancel):\n";
+		
+		int choice = InputHandler.readInt(msg,-1,School.Courses.values().length);
+		
 		assert(choice < School.Courses.values().length);
+		
 		if(choice < 0) {
 			System.out.println("Finished enrolling.");
 			return;
@@ -148,7 +148,6 @@ public class Student {
 	}
 	
 	public void printStudentInfo() {
-		//TODO add print student info code
 		System.out.println(this.getFullName());
 		System.out.println("\tStudent ID        : " + this.studentID);
 		System.out.println("\tStudent Class Year: " + this.classYear);
