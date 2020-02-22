@@ -17,20 +17,24 @@ public class InputHandler {
 	//public static <T> T readInput(String msg, Class<T> c) throws Exception{ 
 	private static <T> T readInput(String msg, Class<T> c) { 
        System.out.println(msg); 
+       T ouput = null;
        try { 
            if(c == Integer.class) 
-               return c.cast(in.nextInt()); 
+        	   ouput = c.cast(in.nextInt()); 
            if(c == Double.class) 
-               return c.cast(in.nextDouble()); 
+        	   ouput = c.cast(in.nextDouble()); 
            if(c == Float.class) 
-               return c.cast(in.nextFloat()); 
+        	   ouput = c.cast(in.nextFloat()); 
            if(c == String.class) 
-               return c.cast(in.next()); 
+        	   ouput = c.cast(in.next()); 
        } catch (InputMismatchException e) { 
-           System.out.println("You did not input a " + c.getName() + ". Please try again.");
+           System.out.println("You did not input a " + c.getSimpleName() + ". Please try again.");
            return c.cast(InputHandler.readInput(msg,c));
        }
-       return null;
+
+       in = new Scanner(System.in);
+       
+       return ouput;
 	} 
 	
 	private static <T> T readInput(String msg, Class<T> c, T lowerBound, T upperBound) {
