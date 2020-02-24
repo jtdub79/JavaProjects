@@ -3,7 +3,9 @@
  */
 package studentDatabaseApp;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -14,28 +16,35 @@ public class InputHandler {
 	
 	private static Scanner in = new Scanner(System.in);
 	
-	//public static <T> T readInput(String msg, Class<T> c) throws Exception{ 
-	private static <T> T readInput(String msg, Class<T> c) { 
-       System.out.println(msg); 
-       T ouput = null;
-       try { 
-           if(c == Integer.class) 
-        	   ouput = c.cast(in.nextInt()); 
-           if(c == Double.class) 
-        	   ouput = c.cast(in.nextDouble()); 
-           if(c == Float.class) 
-        	   ouput = c.cast(in.nextFloat()); 
-           if(c == String.class) 
-        	   ouput = c.cast(in.next()); 
+	private static <T> T readSingleInput(String msg, Class<T> c) {
+		T ouput = null;
+		try { 
+			if(c == Integer.class) 
+				ouput = c.cast(in.nextInt()); 
+           
+			if(c == Double.class) 
+				ouput = c.cast(in.nextDouble()); 
+           
+			if(c == Float.class) 
+        	   	ouput = c.cast(in.nextFloat()); 
+           
+           	if(c == String.class) 
+        	   	ouput = c.cast(in.next()); 
+           
        } catch (InputMismatchException e) { 
-           System.out.println("You did not input a " + c.getSimpleName() + ". Please try again.");
-           return c.cast(InputHandler.readInput(msg,c));
+           	System.out.println("You did not input a " + c.getSimpleName() + ". Please try again.");
+           	return c.cast(InputHandler.readInput(msg,c));
        }
-
-       in = new Scanner(System.in);
        
        return ouput;
-	} 
+	}
+	
+	private static <T> T readInput(String msg, Class<T> c) { 
+		System.out.println(msg); 
+		in = new Scanner(System.in);
+       
+		return InputHandler.readSingleInput(msg, c);
+	}
 	
 	private static <T> T readInput(String msg, Class<T> c, T lowerBound, T upperBound) {
 		T ans = InputHandler.readInput(msg, c);
@@ -68,14 +77,25 @@ public class InputHandler {
         return null;
 	} 
 	
+	private static <T> List<T> readList(String msg, Class<T> c) { 
+		System.out.println(msg); 
+       	in = new Scanner(System.in);
+       	List<T> output = new ArrayList<T>();
+       	while (in.hasNext()) {
+       		output.add(InputHandler.readSingleInput(msg, c));
+       	}
+       
+       	return output;
+	} 
+	
 	
 	// Wrapper methods for each data type
 	
 	/**
 	 * @param the input message
-	 * @return the integer from user input
+	 * @return the Integer from user input
 	 */
-	public static int readInt(String msg) {
+	public static Integer readInt(String msg) {
 		return InputHandler.readInput(msg, Integer.class);
 	}
 	
@@ -83,17 +103,26 @@ public class InputHandler {
 	 * @param the input message
 	 * @param the lower acceptable bound inclusive
 	 * @param the upper acceptable bound inclusive
-	 * @return the integer from user input
+	 * @return the Integer from user input
 	 */
-	public static int readInt(String msg, int lowerBound, int upperBound) {
+	public static Integer readInt(String msg, int lowerBound, int upperBound) {
 		return InputHandler.readInput(msg, Integer.class, lowerBound, upperBound);
 	}
 	
 	/**
 	 * @param the input message
-	 * @return the double from user input
+	 * @return the List of Integers from user input
 	 */
-	public static double readDouble(String msg) {
+	public static List<Integer> readIntList(String msg) {
+		return InputHandler.readList(msg, Integer.class);
+	}
+
+	
+	/**
+	 * @param the input message
+	 * @return the Double from user input
+	 */
+	public static Double readDouble(String msg) {
 		return InputHandler.readInput(msg, Double.class);
 	}
 	
@@ -101,18 +130,25 @@ public class InputHandler {
 	 * @param the input message
 	 * @param the lower acceptable bound inclusive
 	 * @param the upper acceptable bound inclusive
-	 * @return the double from user input
+	 * @return the Double from user input
 	 */
-	public static double readDouble(String msg, double lowerBound, double upperBound) {
+	public static Double readDouble(String msg, double lowerBound, double upperBound) {
 		return InputHandler.readInput(msg, Double.class, lowerBound, upperBound);
 	}
 
+	/**
+	 * @param the input message
+	 * @return the List of Doubles from user input
+	 */
+	public static List<Double> readDoubleList(String msg) {
+		return InputHandler.readList(msg, Double.class);
+	}
 
 	/**
 	 * @param the input message
-	 * @return the float from user input
+	 * @return the Float from user input
 	 */
-	public static float readFloat(String msg) {
+	public static Float readFloat(String msg) {
 		return InputHandler.readInput(msg, Float.class);
 	}
 	
@@ -120,12 +156,19 @@ public class InputHandler {
 	 * @param the input message
 	 * @param the lower acceptable bound inclusive
 	 * @param the upper acceptable bound inclusive
-	 * @return the float from user input
+	 * @return the Float from user input
 	 */
-	public static float readfloat(String msg, float lowerBound, float upperBound) {
+	public static Float readfloat(String msg, float lowerBound, float upperBound) {
 		return InputHandler.readInput(msg, Float.class, lowerBound, upperBound);
 	}
 
+	/**
+	 * @param the input message
+	 * @return the List of Floats from user input
+	 */
+	public static List<Float> readFloatList(String msg) {
+		return InputHandler.readList(msg, Float.class);
+	}
 
 	/**
 	 * @param the input message
